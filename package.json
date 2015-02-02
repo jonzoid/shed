@@ -3,7 +3,7 @@
   "version": "2015.1.31",
   "main": "index.html",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "icon": "shed.png",
     "width": 800,
     "height": 550,
