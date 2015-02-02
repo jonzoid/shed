@@ -19,8 +19,8 @@
 }
 
 h1 {
-  color: #fff;
-  font-size: 24px;
+  color: #ffc000;
+  font-size: 28px;
   font-family: "Grobold";
   font-weight: normal;
   text-shadow:
@@ -32,6 +32,13 @@ h1 {
     0px 2px #000,
     -2px 0px #000,
     0px -2px #000;
+}
+
+h2 {
+  color: #000;
+  font-size: 16px;
+  font-family: "Autour One";
+  font-weight: bold;
 }
 
 body {
@@ -143,15 +150,13 @@ input[type='checkbox']:checked:hover {
 }
 
 input[type=text] {
-   /*.blackBorder;*/
-   border: 2px solid #000;
-   background: #1c1b1b;
-   padding: 6px;
-   width: 200px;
-   outline: none;
-   font-family: inherit;
-   font-size: 14px;
-   color: #fff;
+  border: 2px solid #000;
+  background-color: #1c1b1b;
+  padding: 6px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: #fff;
 }
 
 

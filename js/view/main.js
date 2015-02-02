@@ -4,8 +4,19 @@ shed.view.main = function() {
 $.inherits(shed.view.main, shed.view);
 
 shed.view.main.prototype.decorate_ = function(parent) {
-  var header = new shed.component.header();
-  header.render(parent);
+  if(localStorage.path === undefined || $.trim(localStorage.path) === '') {
+    this.guess_path_();
+  }
+
+  var stonehearth_logo = $.createElement('img')
+    .setAttribute('src', 'img/stonehearth_logo.png')
+    .style({
+      'display': 'block',
+      'margin': '20px auto 20px auto',
+      'width': '600px'
+    });
+
+  parent.appendChild(stonehearth_logo);
 
   var manage_mods_button = $.createElement('button')
     .addClass('button_red')
@@ -14,6 +25,15 @@ shed.view.main.prototype.decorate_ = function(parent) {
 
   manage_mods_button.addEventListener('click', function() {
     new shed.view.mod_manager();
+  });
+
+  var settings_button = $.createElement('button')
+    .addClass('button_red')
+    .innerHTML('Settings');
+  parent.appendChild(settings_button);
+
+  settings_button.addEventListener('click', function() {
+    new shed.view.settings();
   });
 
   // Footer
@@ -29,4 +49,32 @@ shed.view.main.prototype.decorate_ = function(parent) {
   table.td(1, 0).appendChild(message);
 
   parent.appendChild(table.table());
+};
+
+
+/**
+ * Try and guess where the Stonehearth folder is at. If this cannot be
+ * guessed, the user will have to manually enter this value in.
+ */
+shed.view.main.prototype.guess_path_ = function() {
+  console.log('guess_path');
+  var fs = require('fs');
+
+  // Default steam and non-steam install locations.
+  var possible_paths = [
+    process.env['ProgramFiles'] + '\\Steam\\SteamApps\\common\\Stonehearth',
+    process.env['ProgramFiles(x86)'] + '\\Steam\\SteamApps\\common\\Stonehearth',
+    process.env['ProgramFiles'] + '\\Stonehearth',
+    process.env['ProgramFiles(x86)'] + '\\Stonehearth'
+  ];
+
+  // Pick the first detected path.
+  for(var i = 0; i < possible_paths.length; i++) {
+    try {
+      fs.readdirSync(possible_paths[i]);
+      localStorage.path = possible_paths[i];
+      return;
+    }
+    catch(e) {}
+  }
 };
