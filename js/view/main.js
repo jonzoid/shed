@@ -57,7 +57,6 @@ shed.view.main.prototype.decorate_ = function(parent) {
  * guessed, the user will have to manually enter this value in.
  */
 shed.view.main.prototype.guess_path_ = function() {
-  console.log('guess_path');
   var fs = require('fs');
 
   // Default steam and non-steam install locations.
